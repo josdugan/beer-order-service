@@ -2,9 +2,11 @@ package com.josdugan.beerorderservice.mappers;
 
 import com.josdugan.beerorderservice.domain.BeerOrderLine;
 import com.josdugan.beerorderservice.web.model.BeerOrderLineDto;
+import org.mapstruct.DecoratedWith;
 import org.mapstruct.Mapper;
 
 @Mapper(uses = DateMapper.class)
+@DecoratedWith(BeerOrderLineMapperDecorator.class)
 public interface BeerOrderLineMapper {
 
     BeerOrderLineDto beerOrderLineToDto(BeerOrderLine line);
