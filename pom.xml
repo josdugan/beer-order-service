@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>com.josdugan</groupId>
 		<artifactId>brewery-bom</artifactId>
-		<version>0.0.1-SNAPSHOT</version>
+		<version>0.0.2-SNAPSHOT</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.josdugan</groupId>
@@ -13,21 +13,6 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>beer-order-service</name>
 	<description>Demo project for Spring Boot</description>
-
-	<dependencies>
-		<dependency>
-			<groupId>javax.xml.bind</groupId>
-			<artifactId>jaxb-api</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.sun.xml.bind</groupId>
-			<artifactId>jaxb-core</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.sun.xml.bind</groupId>
-			<artifactId>jaxb-impl</artifactId>
-		</dependency>
-	</dependencies>
 
 	<repositories>
 		<repository>
