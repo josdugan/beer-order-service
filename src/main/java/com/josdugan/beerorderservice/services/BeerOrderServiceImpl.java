@@ -1,12 +1,12 @@
 package com.josdugan.beerorderservice.services;
 
 import com.josdugan.beerorderservice.domain.BeerOrder;
+import com.josdugan.beerorderservice.domain.BeerOrderStatusEnum;
 import com.josdugan.beerorderservice.domain.Customer;
-import com.josdugan.beerorderservice.domain.OrderStatusEnum;
 import com.josdugan.beerorderservice.mappers.BeerOrderMapper;
 import com.josdugan.beerorderservice.repositories.BeerOrderRepository;
 import com.josdugan.beerorderservice.repositories.CustomerRepository;
-import com.josdugan.beerorderservice.web.model.BeerOrderDto;
+import com.josdugan.beerworkscommon.dtos.BeerOrderDto;
 import com.josdugan.beerorderservice.web.model.BeerOrderPagedList;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationEventPublisher;
@@ -67,7 +67,7 @@ public class BeerOrderServiceImpl implements BeerOrderService {
             BeerOrder beerOrder = beerOrderMapper.dtoToBeerOrder(beerOrderDto);
             beerOrder.setId(null);
             beerOrder.setCustomer(customerOptional.get());
-            beerOrder.setOrderStatus(OrderStatusEnum.NEW);
+            beerOrder.setOrderStatus(BeerOrderStatusEnum.NEW);
 
             beerOrder.getBeerOrderLines().forEach(line -> line.setBeerOrder(beerOrder));
 
@@ -92,7 +92,7 @@ public class BeerOrderServiceImpl implements BeerOrderService {
     @Override
     public void pickupOrder(UUID customerId, UUID orderId) {
         BeerOrder beerOrder = getOrder(customerId, orderId);
-        beerOrder.setOrderStatus(OrderStatusEnum.PICKED_UP);
+        beerOrder.setOrderStatus(BeerOrderStatusEnum.PICKED_UP);
 
         beerOrderRepository.save(beerOrder);
     }

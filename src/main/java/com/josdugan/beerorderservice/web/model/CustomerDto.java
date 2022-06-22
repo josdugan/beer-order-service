@@ -1,5 +1,6 @@
 package com.josdugan.beerorderservice.web.model;
 
+import com.josdugan.beerworkscommon.dtos.BaseItem;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -11,7 +12,7 @@ import java.util.UUID;
 @Data
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-public class CustomerDto extends BaseItem{
+public class CustomerDto extends BaseItem {
 
     private String name;
 

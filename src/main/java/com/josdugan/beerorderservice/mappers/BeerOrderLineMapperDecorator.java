@@ -3,7 +3,7 @@ package com.josdugan.beerorderservice.mappers;
 import com.josdugan.beerorderservice.domain.BeerOrderLine;
 import com.josdugan.beerorderservice.services.beer.BeerService;
 import com.josdugan.beerorderservice.services.beer.model.BeerDto;
-import com.josdugan.beerorderservice.web.model.BeerOrderLineDto;
+import com.josdugan.beerworkscommon.dtos.BeerOrderLineDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 

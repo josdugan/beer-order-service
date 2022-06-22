@@ -1,8 +1,7 @@
 package com.josdugan.beerorderservice.services;
 
-import com.josdugan.beerorderservice.web.model.BeerOrderDto;
+import com.josdugan.beerworkscommon.dtos.BeerOrderDto;
 import com.josdugan.beerorderservice.web.model.BeerOrderPagedList;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 
 import java.util.UUID;

@@ -1,5 +1,6 @@
 package com.josdugan.beerorderservice.web.model;
 
+import com.josdugan.beerworkscommon.dtos.BeerOrderDto;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 

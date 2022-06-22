@@ -1,7 +1,7 @@
 package com.josdugan.beerorderservice.web.controller;
 
 import com.josdugan.beerorderservice.services.BeerOrderService;
-import com.josdugan.beerorderservice.web.model.BeerOrderDto;
+import com.josdugan.beerworkscommon.dtos.BeerOrderDto;
 import com.josdugan.beerorderservice.web.model.BeerOrderPagedList;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;

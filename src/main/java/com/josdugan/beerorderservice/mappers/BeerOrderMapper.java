@@ -1,7 +1,7 @@
 package com.josdugan.beerorderservice.mappers;
 
 import com.josdugan.beerorderservice.domain.BeerOrder;
-import com.josdugan.beerorderservice.web.model.BeerOrderDto;
+import com.josdugan.beerworkscommon.dtos.BeerOrderDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 

@@ -1,5 +1,6 @@
 package com.josdugan.beerorderservice.web.model;
 
+import com.josdugan.beerworkscommon.dtos.BaseItem;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
