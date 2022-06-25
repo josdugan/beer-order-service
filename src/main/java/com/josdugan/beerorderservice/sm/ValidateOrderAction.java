@@ -1,12 +1,12 @@
 package com.josdugan.beerorderservice.sm;
 
-import com.josdugan.beerorderservice.config.JmsConfig;
 import com.josdugan.beerorderservice.domain.BeerOrder;
 import com.josdugan.beerorderservice.domain.BeerOrderEventEnum;
 import com.josdugan.beerorderservice.domain.BeerOrderStatusEnum;
 import com.josdugan.beerorderservice.mappers.BeerOrderMapper;
 import com.josdugan.beerorderservice.repositories.BeerOrderRepository;
 import com.josdugan.beerorderservice.services.BeerOrderManager;
+import com.josdugan.beerworkscommon.constants.MessageQueues;
 import com.josdugan.beerworkscommon.events.ValidateOrderRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -31,7 +31,7 @@ public class ValidateOrderAction implements Action<BeerOrderStatusEnum, BeerOrde
         String beerOrderId = (String) stateContext.getMessage().getHeaders().get(BeerOrderManager.ORDER_ID_HEADER);
         BeerOrder beerOrder = beerOrderRepository.findOneById(UUID.fromString(beerOrderId));
 
-        jmsTemplate.convertAndSend(JmsConfig.VALIDATE_ORDER_QUEUE, ValidateOrderRequest.builder()
+        jmsTemplate.convertAndSend(MessageQueues.VALIDATE_ORDER_QUEUE, ValidateOrderRequest.builder()
                 .beerOrderDto(beerOrderMapper.beerOrderToDto(beerOrder))
                 .build());
 
