@@ -1,4 +1,4 @@
-package com.josdugan.beerorderservice.sm;
+package com.josdugan.beerorderservice.sm.actions;
 
 import com.josdugan.beerorderservice.domain.BeerOrder;
 import com.josdugan.beerorderservice.domain.BeerOrderEventEnum;
@@ -7,7 +7,6 @@ import com.josdugan.beerorderservice.mappers.BeerOrderMapper;
 import com.josdugan.beerorderservice.repositories.BeerOrderRepository;
 import com.josdugan.beerorderservice.services.BeerOrderManager;
 import com.josdugan.beerworkscommon.constants.MessageQueues;
-import com.josdugan.beerworkscommon.events.ValidateOrderRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.jms.core.JmsTemplate;
@@ -20,21 +19,20 @@ import java.util.UUID;
 @Slf4j
 @RequiredArgsConstructor
 @Component
-public class ValidateOrderAction implements Action<BeerOrderStatusEnum, BeerOrderEventEnum> {
+public class AllocateOrderAction implements Action<BeerOrderStatusEnum, BeerOrderEventEnum> {
 
+    private final JmsTemplate jmsTemplate;
     private final BeerOrderRepository beerOrderRepository;
     private final BeerOrderMapper beerOrderMapper;
-    private final JmsTemplate jmsTemplate;
 
     @Override
     public void execute(StateContext<BeerOrderStatusEnum, BeerOrderEventEnum> stateContext) {
         String beerOrderId = (String) stateContext.getMessage().getHeaders().get(BeerOrderManager.ORDER_ID_HEADER);
         BeerOrder beerOrder = beerOrderRepository.findOneById(UUID.fromString(beerOrderId));
 
-        jmsTemplate.convertAndSend(MessageQueues.VALIDATE_ORDER_QUEUE, ValidateOrderRequest.builder()
-                .beerOrderDto(beerOrderMapper.beerOrderToDto(beerOrder))
-                .build());
+        jmsTemplate.convertAndSend(MessageQueues.ALLOCATE_ORDER_QUEUE,
+                beerOrderMapper.beerOrderToDto(beerOrder));
 
-        log.debug("Sent Validation request to queue for order id " + beerOrderId);
+        log.debug("Sent allocation request for order id: " + beerOrderId);
     }
 }
