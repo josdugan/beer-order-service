@@ -15,16 +15,32 @@ import org.springframework.stereotype.Component;
 @Component
 public class BeerOrderValidationListener {
 
+    public static final String FAIL_VALIDATION = "fail-validation";
+    public static final String DONT_VALIDATE = "dont-validate";
+
     private final JmsTemplate jmsTemplate;
 
     @JmsListener(destination = MessageQueues.VALIDATE_ORDER_QUEUE)
     public void listen(Message msg) {
+        boolean isValid = true;
+        boolean sendResponse = true;
+
         ValidateOrderRequest request = (ValidateOrderRequest) msg.getPayload();
 
-        jmsTemplate.convertAndSend(MessageQueues.VALIDATE_ORDER_RESPONSE_QUEUE,
-                ValidateOrderResult.builder()
-                        .isValid(true)
-                        .orderId(request.getBeerOrderDto().getId())
-                        .build());
+        if (request.getBeerOrderDto().getCustomerRef() != null &&
+                request.getBeerOrderDto().getCustomerRef().equals(FAIL_VALIDATION)) {
+            isValid = false;
+        } else if (request.getBeerOrderDto().getCustomerRef() != null &&
+                    request.getBeerOrderDto().getCustomerRef().equals(DONT_VALIDATE)) {
+            sendResponse = false;
+        }
+
+        if (sendResponse) {
+            jmsTemplate.convertAndSend(MessageQueues.VALIDATE_ORDER_RESPONSE_QUEUE,
+                    ValidateOrderResult.builder()
+                            .isValid(isValid)
+                            .orderId(request.getBeerOrderDto().getId())
+                            .build());
+        }
     }
 }
