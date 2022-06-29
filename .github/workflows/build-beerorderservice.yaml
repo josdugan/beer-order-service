@@ -14,6 +14,6 @@ jobs:
         with:
           java-version: '11'
           distribution: 'zulu'
-      - run: mvn clean package
+      - run: mvn verify
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
