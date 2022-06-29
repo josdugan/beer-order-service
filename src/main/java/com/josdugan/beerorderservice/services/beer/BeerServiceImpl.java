@@ -1,6 +1,6 @@
 package com.josdugan.beerorderservice.services.beer;
 
-import com.josdugan.beerorderservice.services.beer.model.BeerDto;
+import com.josdugan.beerworkscommon.dtos.BeerDto;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.stereotype.Service;
@@ -12,9 +12,6 @@ import java.util.UUID;
 @ConfigurationProperties(prefix = "sfg.brewery", ignoreUnknownFields = false)
 @Service
 public class BeerServiceImpl implements BeerService {
-
-    private final String BEER_PATH_V1 = "/api/v1/beer/";
-    private final String BEER_UPC_PATH_V1 = "/api/v1/beerUpc/";
 
     private final RestTemplate restTemplate;
     private String beerServiceHost;
@@ -28,7 +25,7 @@ public class BeerServiceImpl implements BeerService {
     }
 
     @Override
-    public Optional<BeerDto> getBeerById(UUID uuid) {
+    public Optional<BeerDto > getBeerById(UUID uuid) {
         return Optional.of(restTemplate.getForObject(beerServiceHost + BEER_PATH_V1 + uuid.toString(), BeerDto.class));
     }
 

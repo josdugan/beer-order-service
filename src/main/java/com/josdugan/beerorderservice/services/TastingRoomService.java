@@ -7,7 +7,6 @@ import com.josdugan.beerorderservice.repositories.CustomerRepository;
 import com.josdugan.beerworkscommon.dtos.BeerOrderDto;
 import com.josdugan.beerworkscommon.dtos.BeerOrderLineDto;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -38,7 +37,7 @@ public class TastingRoomService {
     }
 
     @Transactional
-    @Scheduled(fixedRate = 2000)
+//    @Scheduled(fixedRate = 2000)
     public void placeTastingRoomOrder() {
         List<Customer> customerList = customerRepository.findAllByCustomerNameLike(BeerOrderBootstrap.TASTING_ROOM);
 
