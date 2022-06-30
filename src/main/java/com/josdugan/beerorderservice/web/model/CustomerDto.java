@@ -14,15 +14,15 @@ import java.util.UUID;
 @EqualsAndHashCode(callSuper = true)
 public class CustomerDto extends BaseItem {
 
-    private String name;
+    private String customerName;
 
     @Builder
     public CustomerDto(UUID id,
                        Integer version,
                        OffsetDateTime createdDate,
                        OffsetDateTime lastModifiedDate,
-                       String name) {
+                       String customerName) {
         super(id, version, createdDate, lastModifiedDate);
-        this.name = name;
+        this.customerName = customerName;
     }
 }
